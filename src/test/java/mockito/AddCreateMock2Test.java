@@ -1,5 +1,6 @@
 package mockito;
 
+import Calculator.ValidNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ class AddCreateMock2Test {
   @Test
     public void addTest(){
     add.add(3,2);
-    Mockito.verify(validNumber).checkNumber(3);
+    Mockito.verify(validNumber).isNumber(3);
   }
 
 

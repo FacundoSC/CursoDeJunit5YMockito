@@ -1,11 +1,12 @@
 package mockito;
 
+import Calculator.ValidNumber;
+
 public class Add {
     private ValidNumber validatorNumber;
     private Print print;
 
     public Add(ValidNumber valid){
-
       this.validatorNumber =valid;
     }
 
@@ -15,7 +16,7 @@ public class Add {
     }
 
     public int add(Object a, Object b){
-        if(validatorNumber.checkNumber(a) && validatorNumber.checkNumber(b))
+        if(validatorNumber.isNumber(a) && validatorNumber.isNumber(b))
         {
             return (Integer)a + (Integer)b;
         }
@@ -29,7 +30,7 @@ public class Add {
     }
 
     public void addMessage(Object a, Object b) {
-        if(validatorNumber.checkNumber(a) && validatorNumber.checkNumber(b))
+        if(validatorNumber.isNumber(a) && validatorNumber.isNumber(b))
         {
             print.showMessage( (Integer)a + (Integer)b);
         }

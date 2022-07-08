@@ -1,5 +1,6 @@
 package mockito;
 
+import Calculator.ValidNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -26,29 +27,28 @@ class AddTest {
     @Captor
     private ArgumentCaptor<Integer> capturador;
 
-    //Arrage
+
     @BeforeEach
     public void setUp(){
         MockitoAnnotations.openMocks(this);
-        //MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void addTest(){
         /* patron when  then Return */
         for ( int i =0 ; i<=10 ; i++) {
-            when(validNumber.checkNumber(i)).thenReturn(true);
+            when(validNumber.isNumber(i)).thenReturn(true);
         }
         assertEquals(12,add.add(3,9));
     }
 
     @Test
     public void addPatronWhenReturnMethodRealTest(){
-        when(validNumber.checkNumber(3)).thenCallRealMethod();
-        assertEquals(true,validNumber.checkNumber(3));
+        when(validNumber.isNumber(3)).thenCallRealMethod();
+        assertEquals(true,validNumber.isNumber(3));
 
-        when(validNumber.checkNumber("3")).thenCallRealMethod();
-        assertEquals(false,validNumber.checkNumber("3"));
+        when(validNumber.isNumber("3")).thenCallRealMethod();
+        assertEquals(false,validNumber.isNumber("3"));
 
     }
 
@@ -63,16 +63,17 @@ class AddTest {
          when(validNumber.doubleTointeger(7.7)).thenAnswer(answer);
          assertEquals(14, add.addInt(7.7,7.7));
      }
+
      // patrones para trabajar con mockito  en pruebas unitarias.
 
     //Arrage   o      //Given
-    // Act (action)   //When
+    //Act (action)   //When
     //Assert          //Then
     @Test
     public void patterTest(){
         //Arrage
-        when(validNumber.checkNumber(4)).thenReturn(true);
-        when(validNumber.checkNumber(5)).thenReturn(true);
+        when(validNumber.isNumber(4)).thenReturn(true);
+        when(validNumber.isNumber(5)).thenReturn(true);
         //Act
         int resultado = add.add(4,5);
         //Assert
@@ -82,8 +83,8 @@ class AddTest {
     @Test
     public void patterBDDTest(){
         //Given
-        given(validNumber.checkNumber(4)).willReturn(true);
-        given(validNumber.checkNumber(5)).willReturn(true);
+        given(validNumber.isNumber(4)).willReturn(true);
+        given(validNumber.isNumber(5)).willReturn(true);
         //When
         int resultado = add.add(4,5);
         //Then
@@ -92,7 +93,7 @@ class AddTest {
     @Test
     public void argumentMarcherTest(){
         //Given
-        given(validNumber.checkNumber(anyInt())).willReturn(true);
+        given(validNumber.isNumber(anyInt())).willReturn(true);
         //When
         int resultado = add.add(4,5);
         //Then
@@ -102,8 +103,8 @@ class AddTest {
     @Test
     public void addPrintTest(){
         //Given
-        given(validNumber.checkNumber(4)).willReturn(true);
-        given(validNumber.checkNumber(5)).willReturn(true);
+        given(validNumber.isNumber(4)).willReturn(true);
+        given(validNumber.isNumber(5)).willReturn(true);
         //When
         add.addMessage(4,5);
         //then
@@ -114,7 +115,7 @@ class AddTest {
         //verify(validNumber,atLeastOnce()).checkNumber(4);
         //verify(validNumber,atLeast(1)).checkNumber(5);
         //verify(validNumber,atMostOnce()).checkNumber(4);
-        verify(validNumber,atMost(2)).checkNumber(4);
+        verify(validNumber,atMost(2)).isNumber(4);
         verify(print).showMessage(9);
         verify(print,never()).showError();
     }
@@ -122,8 +123,8 @@ class AddTest {
     @Test
     public void captorTest(){
         //given
-        given(validNumber.checkNumber(4)).willReturn(true);
-        given(validNumber.checkNumber(5)).willReturn(true);
+        given(validNumber.isNumber(4)).willReturn(true);
+        given(validNumber.isNumber(5)).willReturn(true);
         //when
         add.addMessage(4,5);
         //then

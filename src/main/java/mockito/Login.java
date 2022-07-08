@@ -5,12 +5,10 @@ public class Login {
     private Boolean isLogin;
 
     public Boolean getLogin() {
-
         return isLogin;
     }
 
     public Login(WebService webService){
-
         this.webService = webService;
         isLogin= false;
     }

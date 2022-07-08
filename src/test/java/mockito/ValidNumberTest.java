@@ -1,5 +1,6 @@
 package mockito;
 
+import Calculator.ValidNumber;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,33 +18,33 @@ class ValidNumberTest {
 
     @Test
      public void checkNumberValid(){
-        assertTrue(validatorNumber.checkNumber(5),"el  numero  ingresado no es valido");
+        assertTrue(validatorNumber.isNumber(5),"el  numero  ingresado no es valido");
     }
 
     @Test
     public void checkNumberNegativeValid(){
-        assertFalse(validatorNumber.checkNumber(-5),"el numero ingresado es valido ");
+        assertFalse(validatorNumber.isNumber(-5),"el numero ingresado es valido ");
     }
     @Test
     public void checkStringValid(){
-        assertFalse(validatorNumber.checkNumber("5"),"el numero ingresado es valido");
+        assertFalse(validatorNumber.isNumber("5"),"el numero ingresado es valido");
     }
 
    @Test
     public void ckeckZeroValidObjectTest() {
-        assertEquals(true, validatorNumber.checkZero(-30));
+        assertEquals(true, validatorNumber.isZero(-30));
     }
 
     @Test
     public void ckeckZeroInvalidObjectTest()
     {
-        assertEquals(false, validatorNumber.checkZero("facundo"));
+        assertEquals(false, validatorNumber.isZero("facundo"));
     }
 
     @Test
     public void ckeckZeroCeroNumberTest()
     {
-        assertThrows(ArithmeticException.class,()->validatorNumber.checkZero(0));
+        assertThrows(ArithmeticException.class,()->validatorNumber.isZero(0));
     }
 
 
@@ -51,9 +52,9 @@ class ValidNumberTest {
     @Deprecated
     public void ckeckZeroCeroNumberPatronWhenThrowExceptionTest()
     {
-       when(validatorNumber.checkZero(0)).thenThrow(new ArithmeticException());
+       when(validatorNumber.isZero(0)).thenThrow(new ArithmeticException());
        try{
-           validatorNumber.checkZero(0);
+           validatorNumber.isZero(0);
        }
        catch (ArithmeticException exceptionMockeada){
            assertEquals(ArithmeticException.class,exceptionMockeada.getClass());
@@ -64,7 +65,7 @@ class ValidNumberTest {
     @Test
     public void ckeckZeroCeroNumberMessageTest()
     {
-        ArithmeticException thrown = assertThrows(ArithmeticException.class,()->validatorNumber.checkZero(0));
+        ArithmeticException thrown = assertThrows(ArithmeticException.class,()->validatorNumber.isZero(0));
         assertEquals("no se puede recibir un cero", thrown.getMessage());
     }
 
@@ -72,7 +73,7 @@ class ValidNumberTest {
     public void ckeckZeroCeroNumberMessage2Test()
     {
         try {
-            validatorNumber.checkZero(0);
+            validatorNumber.isZero(0);
             fail("se envio el valor cero");
              }
         catch ( ArithmeticException ex){
